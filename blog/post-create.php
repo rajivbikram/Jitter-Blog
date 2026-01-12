@@ -32,8 +32,8 @@ if (isset($_POST['save'])) {
     } elseif (empty($slug)) {
         $message = "Slug is required.";
         $messageType = "danger";
-    } elseif (empty($slug)) {
-        $message = "Slug is required.";
+    } elseif (empty($content)) {
+        $message = "Content is required.";
         $messageType = "danger";
     } elseif (empty($category)) {
         $message = "Category is required.";
@@ -97,7 +97,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post Category</title>
+    <title>Post Create</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 

@@ -94,7 +94,7 @@ $conn->close();
         </div>
       </div>
       <div class="col-lg-6">
-        <img src="img/login.png" alt="Login" class="img-fluid">
+        <img src="img/register.png" alt="Login" class="img-fluid">
       </div>
     </div>
   </div>
