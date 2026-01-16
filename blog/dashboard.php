@@ -21,6 +21,19 @@ if ($_SESSION['isLogin'] !== true) {
     <div class="container my-5">
         <div class="row">
             <?php include 'include/sidebar.php'; ?>
+            <div class="col-lg-9">
+                <div class="alert alert-info">
+                    <h4>
+                        Hello! <?= $_SESSION['name'] ?>
+                    </h4>
+                    <p>Welcome to Dashboard</p>
+                </div>
+                <div class="d-flex gap-3">
+                    <a href="post-list.php" class="btn btn-primary">Manage Post</a>
+                    <a href="post-list.php" class="btn btn-success">Manage Category</a>
+                    <a href="post-list.php" class="btn btn-warning">Manage Users</a>
+                </div>
+            </div>
         </div>
     </div>
 

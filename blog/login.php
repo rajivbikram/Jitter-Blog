@@ -73,7 +73,7 @@ $conn->close();
     <div class="row">
       <div class="col-lg-6 my-auto">
         <?php if (!empty($message)) { ?>
-          <div class="alert alert-danger">
+          <div class="alert alert-<?= $messageType ?>">
             <?= $message ?>
           </div>
         <?php } ?>

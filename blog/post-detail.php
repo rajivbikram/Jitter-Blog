@@ -15,6 +15,30 @@ if (mysqli_num_rows($result) == 0) {
     exit;
 }
 $post = mysqli_fetch_assoc($result);
+$postId = $post['id'];
+if (isset($_POST['save_comment'])) {
+    $comment = $_POST['comment'];
+    $userID = $_SESSION['userId'];
+    $createdAt = date('Y-m-d H:i:s');
+
+    if (empty($comment)) {
+        $message = "Comment is required";
+        $messageType = 'danger';
+    } else {
+        $sql = "INSERT INTO comments (comment, user_id, post_id, created_at) VALUES('$comment', '$userID', '$postId', '$createdAt')";
+        if (mysqli_query($conn, $sql) === TRUE) {
+            $message = "Comment Posted Successfully!";
+            $messageType = 'success';
+        }
+    }
+}
+
+// feting the comments
+$commentSql = "SELECT c.id, c.comment, c.user_id, c.post_id, c.created_at, u.fullname AS author
+        FROM comments c
+        JOIN users u ON c.user_id = u.user_id
+        WHERE c.post_id = '$postId'";
+$commentResult = mysqli_query($conn, $commentSql);
 ?>
 
 <!doctype html>
@@ -75,9 +99,31 @@ $post = mysqli_fetch_assoc($result);
             <hr>
             <div class="mt-4">
                 <h5>Comments</h5>
+                <?php
+                if (mysqli_num_rows($commentResult) > 0) {
+                    while ($comment = mysqli_fetch_assoc($commentResult)) {
+                ?>
+                        <div class="p-3 border mb-3">
+                            <p>
+                                <span>
+                                    <?= $comment['author'] ?>
+                                </span>
+                                <span>
+                                    <?= $comment['created_at'] ?>
+                                </span>
+                            </p>
+                            <p> <?= $comment['comment'] ?> </p>
+                        </div>
+                    <?php }
+                }
+                if (!empty($message)) { ?>
+                    <div class="alert alert-<?= $messageType ?>">
+                        <?= $message ?>
+                    </div>
+                <?php } ?>
                 <form action="#" method="post">
                     <textarea rows="5" placeholder="Your comment is here" name="comment" id="" class="form-control"></textarea>
-                    <button type="submit" class="btn btn-primary mt-3">Post Comment</button>
+                    <button name="save_comment" type="submit" class="btn btn-primary mt-3">Post Comment</button>
                 </form>
             </div>
         </div>
