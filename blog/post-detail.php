@@ -104,14 +104,19 @@ $commentResult = mysqli_query($conn, $commentSql);
                     while ($comment = mysqli_fetch_assoc($commentResult)) {
                 ?>
                         <div class="p-3 border mb-3">
-                            <p>
-                                <span>
-                                    <?= $comment['author'] ?>
-                                </span>
-                                <span>
-                                    <?= $comment['created_at'] ?>
-                                </span>
-                            </p>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <span>
+                                        <?= $comment['author'] ?>
+                                    </span>
+                                    <span>
+                                        <?= $comment['created_at'] ?>
+                                    </span>
+                                </div>
+                                <?php if ($_SESSION['userId'] == $comment['user_id']) { ?>
+                                    <a href="delete-comment.php?id=<?= $comment['id'] ?>" class="btn btn-danger btn-sm ">Delete</a>
+                                <?php } ?>
+                            </div>
                             <p> <?= $comment['comment'] ?> </p>
                         </div>
                     <?php }

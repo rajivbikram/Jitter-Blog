@@ -12,11 +12,11 @@
             Posts
         </a>
 
-        <a href="" class="list-group-item list-group-item-action">
+        <a href="user-list.php" class="list-group-item list-group-item-action">
             Users
         </a>
 
-        <a href="" class="list-group-item list-group-item-action">
+        <a href="comment-list.php" class="list-group-item list-group-item-action">
             Comments
         </a>
 
